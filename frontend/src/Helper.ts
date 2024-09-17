@@ -63,6 +63,7 @@ export const BulkAddChecks = async (
       item: count,
       descricao: check,
       situacao: 0,
+      motivo: "",
     };
     count = count + 1;
 

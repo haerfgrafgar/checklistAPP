@@ -104,7 +104,7 @@ const EditChecklistPage = (props: Props) => {
   };
 
   const handleCheckAdd = () => {
-    const checkInstance = new CheckDto(0, newCheckDescricao, 4);
+    const checkInstance = new CheckDto(0, newCheckDescricao, 4, "");
     AddCheck(checkInstance, checklist!.id);
   };
 
