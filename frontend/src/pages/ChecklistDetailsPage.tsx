@@ -4,6 +4,7 @@ import { GetCheckById, GetChecklistById, RespondCheck } from "../api";
 import { Check, Checklist } from "../interfaces";
 import { mapCheckToRespondCheckDto } from "../mappers/Check";
 import { translateSituacao } from "../Helper";
+import Swal from "sweetalert2";
 
 type Props = {};
 
@@ -13,6 +14,8 @@ const ChecklistDetailsPage = (props: Props) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<string[]>([]);
 
+  const [toRespond, setToRespond] = useState<Check[]>([]);
+
   const buttonRefJump = useRef<HTMLButtonElement>(null);
   const buttonRefPrev = useRef<HTMLButtonElement>(null);
   const buttonRefC = useRef<HTMLButtonElement>(null);
@@ -21,9 +24,33 @@ const ChecklistDetailsPage = (props: Props) => {
   const buttonRefP = useRef<HTMLButtonElement>(null);
 
   const checkOnClickUpdate = async (check: Check, choice: number) => {
-    check.situacao = choice;
-    await RespondCheck(check.id, mapCheckToRespondCheckDto(check));
-    fetchData();
+    if (choice === 2 || choice === 4) {
+      Swal.fire({
+        title: "Motivo: ",
+        input: "text",
+        inputAttributes: {
+          autocapitalize: "off",
+        },
+        showCancelButton: true,
+        confirmButtonText: "Edit",
+        showLoaderOnConfirm: true,
+        preConfirm: async (text) => {
+          check.situacao = choice;
+          check.motivo = text;
+          console.log(check);
+          await RespondCheck(check.id, mapCheckToRespondCheckDto(check));
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      }).then((result) => {
+        handleNext();
+        return;
+      });
+    } else {
+      check.situacao = choice;
+      check.motivo = "";
+      await RespondCheck(check.id, mapCheckToRespondCheckDto(check));
+      handleNext();
+    }
   };
 
   async function fetchData() {
@@ -84,14 +111,21 @@ const ChecklistDetailsPage = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    checklist &&
+    if (checklist !== undefined) {
       setQuestions(checklist?.checks.map((check) => check.descricao));
+      setToRespond(
+        checklist.checks
+          .filter((check) => check.situacao === 2 || check.situacao === 4)
+          .map((check) => check)
+      );
+    }
   }, [checklist]);
 
   const handleNext = () => {
     if (currentQuestionIndex <= questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
+    fetchData();
   };
 
   const handlePrevious = () => {
@@ -180,9 +214,11 @@ const ChecklistDetailsPage = (props: Props) => {
 
             <button
               ref={buttonRefC}
-              onClick={() => {
-                checkOnClickUpdate(checklist!.checks[currentQuestionIndex], 1);
-                handleNext();
+              onClick={async () => {
+                await checkOnClickUpdate(
+                  checklist!.checks[currentQuestionIndex],
+                  1
+                );
               }}
               className="me-1"
             >
@@ -190,9 +226,11 @@ const ChecklistDetailsPage = (props: Props) => {
             </button>
             <button
               ref={buttonRefNC}
-              onClick={() => {
-                checkOnClickUpdate(checklist!.checks[currentQuestionIndex], 2);
-                handleNext();
+              onClick={async () => {
+                await checkOnClickUpdate(
+                  checklist!.checks[currentQuestionIndex],
+                  2
+                );
               }}
               className="me-1"
             >
@@ -200,9 +238,11 @@ const ChecklistDetailsPage = (props: Props) => {
             </button>
             <button
               ref={buttonRefNA}
-              onClick={() => {
-                checkOnClickUpdate(checklist!.checks[currentQuestionIndex], 3);
-                handleNext();
+              onClick={async () => {
+                await checkOnClickUpdate(
+                  checklist!.checks[currentQuestionIndex],
+                  3
+                );
               }}
               className="me-1"
             >
@@ -210,9 +250,11 @@ const ChecklistDetailsPage = (props: Props) => {
             </button>
             <button
               ref={buttonRefP}
-              onClick={() => {
-                checkOnClickUpdate(checklist!.checks[currentQuestionIndex], 4);
-                handleNext();
+              onClick={async () => {
+                await checkOnClickUpdate(
+                  checklist!.checks[currentQuestionIndex],
+                  4
+                );
               }}
             >
               P
@@ -222,7 +264,6 @@ const ChecklistDetailsPage = (props: Props) => {
               ref={buttonRefJump}
               onClick={() => {
                 checkOnClickUpdate(checklist!.checks[currentQuestionIndex], 0);
-                handleNext();
               }}
               className="ms-5"
             >

@@ -62,6 +62,7 @@ namespace api.Repository
                 return null;
 
             existingCheck.Situacao = checkDto.Situacao;
+            existingCheck.Motivo = checkDto.Motivo;
 
             await _context.SaveChangesAsync();
 

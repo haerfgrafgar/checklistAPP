@@ -73,8 +73,6 @@ export const RespondCheck = async (
       body: JSON.stringify(checkData),
     });
 
-    console.log(getToken());
-
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

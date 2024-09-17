@@ -17,7 +17,8 @@ namespace api.Mappers
                 ChecklistId = checkModel.ChecklistId,
                 Item = checkModel.Item,
                 Situacao = checkModel.Situacao,
-                Descricao = checkModel.Descricao
+                Descricao = checkModel.Descricao,
+                Motivo = checkModel.Motivo
             };
         }
 
@@ -36,7 +37,8 @@ namespace api.Mappers
         {
             return new RespondCheckRequestDto
             {
-                Situacao = check.Situacao
+                Situacao = check.Situacao,
+                Motivo = check.Motivo
             };
         }
     }

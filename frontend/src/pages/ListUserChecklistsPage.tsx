@@ -1,18 +1,15 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { Checklist } from "../interfaces";
-import {
-  GetChecklistById,
-  GetAllChecklists,
-  GetAllAssignedChecklists,
-} from "../api";
-import Search from "../components/Search/Search";
+import { GetAllAssignedChecklists } from "../api";
 import CardList from "../components/CardList/CardList";
 import { getToken } from "../Helper";
+import { useParams } from "react-router-dom";
 
 type Props = {};
 
-const ListChecklistsPage = (props: Props) => {
+const ListUserChecklistsPage = (props: Props) => {
   const token = getToken();
+  const { username } = useParams<{ username: string }>();
   const [searchResult, setSearchResult] = useState<Checklist[]>([]);
   const [serverError, setServerError] = useState<string>("");
   const [modifyArray, setModifyArray] = useState<string[]>([]); // --> onPropDrilling
@@ -26,7 +23,12 @@ const ListChecklistsPage = (props: Props) => {
   };
 
   const makeApiRequest = async () => {
-    const result = await GetAllAssignedChecklists(token!.given_name);
+    if (username == null) {
+      console.log("Username not found.");
+      return;
+    }
+
+    const result = await GetAllAssignedChecklists(username);
 
     if (typeof result === "string") {
       setServerError(result);
@@ -48,4 +50,4 @@ const ListChecklistsPage = (props: Props) => {
   );
 };
 
-export default ListChecklistsPage;
+export default ListUserChecklistsPage;

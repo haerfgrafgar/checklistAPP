@@ -5,11 +5,13 @@ export const mapCheckToCheckDto = (check: Check): CheckDto => {
     item: check.item,
     descricao: check.descricao,
     situacao: check.situacao,
+    motivo: check.motivo,
   };
 };
 
 export const mapCheckToRespondCheckDto = (check: Check): ResponseCheckDto => {
   return {
     situacao: check.situacao,
+    motivo: check.motivo,
   };
 };

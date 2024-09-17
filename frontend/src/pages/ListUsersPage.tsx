@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { GetAllAssignedChecklists, GetAllUsers } from "../api";
 import { AccountDto } from "../interfaces";
+import { useNavigate } from "react-router";
 
 type Props = {};
 
 const ListUsersPage = (props: Props) => {
+  const navigate = useNavigate();
   const [searchResult, setSearchResult] = useState<AccountDto[]>([]);
   const [serverError, setServerError] = useState<string>("");
 
@@ -21,8 +23,7 @@ const ListUsersPage = (props: Props) => {
   };
 
   const handleClick = async (username: string) => {
-    const result = await GetAllAssignedChecklists(username);
-    console.log(result);
+    navigate("/checklists/user/" + username);
   };
 
   useEffect(() => {

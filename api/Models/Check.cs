@@ -15,5 +15,6 @@ namespace api.Models
         public required string Descricao { get; set; }
         public int Situacao { get; set; } = 0;
         //1: Conforme     2: NaoConforme      3: NaoAplicavel      4: Pendente
+        public string Motivo { get; set; }
     }
 }

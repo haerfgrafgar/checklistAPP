@@ -8,6 +8,7 @@ import EditChecklistPage from "../pages/EditChecklistPage";
 import LoginPage from "../pages/LoginPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import ListUsersPage from "../pages/ListUsersPage";
+import ListUserChecklistsPage from "../pages/ListUserChecklistsPage";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <EditChecklistPage />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "checklists/user/:username",
+        element: (
+          <ProtectedRoutes>
+            <ListUserChecklistsPage />
           </ProtectedRoutes>
         ),
       },

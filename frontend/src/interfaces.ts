@@ -4,12 +4,14 @@ export interface Check {
   item: number;
   descricao: string;
   situacao: number;
+  motivo: string;
 }
 
 export interface CheckDto {
   item: number;
   descricao: string;
   situacao: number;
+  motivo: string;
 }
 
 export interface AccountDto {
@@ -18,6 +20,7 @@ export interface AccountDto {
 
 export interface ResponseCheckDto {
   situacao: number;
+  motivo: string;
 }
 
 export interface Checklist {
