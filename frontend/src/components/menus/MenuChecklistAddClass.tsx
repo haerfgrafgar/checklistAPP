@@ -1,6 +1,37 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BulkAddChecks } from "../../Helper";
-import { ChecklistClassInstrumentacaoCriterioDeProjetoChecks } from "../../Globals";
+import {
+  ChecklistClassCivilCriterioDeProjetoChecks,
+  ChecklistClassCivilMemorialDeCalculo,
+  ChecklistClassCivilMemorialDescritivoChecks,
+  ChecklistClassCivilRelatoriosChecks,
+  ChecklistClassCivilSondagemChecks,
+  ChecklistClassEletricaAterramentoESpdaChecks,
+  ChecklistClassEletricaCriterioDeProjetoChecks,
+  ChecklistClassEletricaDesenhosChecks,
+  ChecklistClassEletricaDetalhamentosChecks,
+  ChecklistClassEletricaDiagramasChecks,
+  ChecklistClassEletricaEspecificacoesTecnicasChecks,
+  ChecklistClassEletricaEstudosDeIncidenciaSolarChecks,
+  ChecklistClassEletricaListaDeCabosChecks,
+  ChecklistClassEletricaListaDeCargasChecks,
+  ChecklistClassEletricaListaDeMateriaisChecks,
+  ChecklistClassEletricaMemorialDeCalculoChecks,
+  ChecklistClassEletricaPlantaDeDistribuicaoDeForcaEControleChecks,
+  ChecklistClassEletricaPlantasDeIluminacaoETomadasChecks,
+  ChecklistClassEletricaProcedimentosDeMedicaoChecks,
+  ChecklistClassEletricaRelatoriosChecks,
+  ChecklistClassEletricaRequisicoesDeMaterial,
+  ChecklistClassInstrumentacaoCriterioDeProjetoChecks,
+  ChecklistClassInstrumentacaoDesenhosChecks,
+  ChecklistClassInstrumentacaoDiagramaDeInterligacaoChecks,
+  ChecklistClassInstrumentacaoFolhaDeDadosChecks,
+  ChecklistClassInstrumentacaoListaDeCabosChecks,
+  ChecklistClassInstrumentacaoListaDeCargasEletricasChecks,
+  ChecklistClassInstrumentacaoListasChecks,
+  ChecklistClassInstrumentacaoMemorialDeCalculoChecks,
+  ChecklistClassInstrumentacaoRequisicaoDeMateriaisChecks,
+} from "../../Globals";
 
 type Props = {
   checklistId: number;
@@ -44,12 +75,59 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           </button>
           {checklists.CIVIL && (
             <div>
-              <button>CRITÉRIOS DE PROJETO</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassCivilCriterioDeProjetoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                CRITÉRIOS DE PROJETO
+              </button>
               <button>DESENHOS</button>
-              <button>MEMORIAL DE CÁLCULO</button>
-              <button>MEMORIAL DESCRITIVO</button>
-              <button>RELATÓRIOS</button>
-              <button>SONDAGEM</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassCivilMemorialDeCalculo
+                  );
+                  window.location.reload();
+                }}
+              >
+                MEMORIAL DE CÁLCULO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassCivilMemorialDescritivoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                MEMORIAL DESCRITIVO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassCivilRelatoriosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                RELATÓRIOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(checklistId, ChecklistClassCivilSondagemChecks);
+                  window.location.reload();
+                }}
+              >
+                SONDAGEM
+              </button>
             </div>
           )}
         </div>
@@ -64,22 +142,182 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           </button>
           {checklists.ELETRICA && (
             <div>
-              <button>ATERRAMENTO E SPDA</button>
-              <button>CRITÉRIO DE PROJETO</button>
-              <button>DESENHOS</button>
-              <button>DETALHAMENTOS</button>
-              <button>DIAGRAMAS</button>
-              <button>ESPECIFICAÇÕES TÉCNICAS</button>
-              <button>ESTUDOS DE INCIDÊNCIA SOLAR</button>
-              <button>LISTA DE CABOS</button>
-              <button>LISTA DE CARGAS</button>
-              <button>LISTA DE MATERIAIS</button>
-              <button>MEMORIAL DE CÁLCULO</button>
-              <button>PLANTA DE DISTRIBUIÇÃO DE FORÇA E CONTROLE</button>
-              <button>PLANTAS DE ILUMINAÇÃO E TOMADAS</button>
-              <button>PROCEDIMENTOS DE MEDIÇÃO</button>
-              <button>RELATÓRIOS</button>
-              <button>REQUISIÇÕES DE MATERIAL</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaAterramentoESpdaChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ATERRAMENTO E SPDA
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaCriterioDeProjetoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                CRITÉRIO DE PROJETO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaDesenhosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DESENHOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaDetalhamentosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DETALHAMENTOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaDiagramasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DIAGRAMAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaEspecificacoesTecnicasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ESPECIFICAÇÕES TÉCNICAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaEstudosDeIncidenciaSolarChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ESTUDOS DE INCIDÊNCIA SOLAR
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaListaDeCabosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTA DE CABOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaListaDeCargasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTA DE CARGAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaListaDeMateriaisChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTA DE MATERIAIS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaMemorialDeCalculoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                MEMORIAL DE CÁLCULO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaPlantaDeDistribuicaoDeForcaEControleChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                PLANTA DE DISTRIBUIÇÃO DE FORÇA E CONTROLE
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaPlantasDeIluminacaoETomadasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                PLANTAS DE ILUMINAÇÃO E TOMADAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaProcedimentosDeMedicaoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                PROCEDIMENTOS DE MEDIÇÃO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaRelatoriosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                RELATÓRIOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassEletricaRequisicoesDeMaterial
+                  );
+                  window.location.reload();
+                }}
+              >
+                REQUISIÇÕES DE MATERIAL
+              </button>
             </div>
           )}
         </div>
@@ -98,23 +336,104 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           {checklists.INSTRUMENTACAO && (
             <div>
               <button
-                onClick={() =>
+                onClick={() => {
                   BulkAddChecks(
                     checklistId,
                     ChecklistClassInstrumentacaoCriterioDeProjetoChecks
-                  )
-                }
+                  );
+                  window.location.reload();
+                }}
               >
                 CRITÉRIO DE PROJETO
               </button>
-              <button>DESENHOS</button>
-              <button>DIAGRAMA DE INTERLIGAÇÃO</button>
-              <button>FOLHA DE DADOS</button>
-              <button>LISTA DE CABOS</button>
-              <button>LISTA DE CARGAS ELÉTRICAS</button>
-              <button>LISTAS</button>
-              <button>MEMORIAL DE CÁLCULO</button>
-              <button>REQUISIÇÃO DE MATERIAIS</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoDesenhosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DESENHOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoDiagramaDeInterligacaoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DIAGRAMA DE INTERLIGAÇÃO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoFolhaDeDadosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                FOLHA DE DADOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoListaDeCabosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTA DE CABOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoListaDeCargasEletricasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTA DE CARGAS ELÉTRICAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoListasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoMemorialDeCalculoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                MEMORIAL DE CÁLCULO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoRequisicaoDeMateriaisChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                REQUISIÇÃO DE MATERIAIS
+              </button>
             </div>
           )}
         </div>
