@@ -129,7 +129,7 @@ export const PostChecklist = async (checklist: ChecklistDto): Promise<void> => {
 
     const data = await response.json();
     createdChecklistId = data.id;
-    BulkAddChecks(createdChecklistId, DefaultChecks);
+    BulkAddChecks(createdChecklistId, DefaultChecks, 1);
     return data;
   } catch (error) {
     console.error("Error:", error);

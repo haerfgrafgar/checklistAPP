@@ -55,7 +55,7 @@ export const getToken = (): TokenPayload | null => {
 export const BulkAddChecks = async (
   checklistId: number,
   checks: string[],
-  count: number = 1
+  count: number = 34
 ) => {
   var count: number = count;
   checks.forEach(async (check) => {

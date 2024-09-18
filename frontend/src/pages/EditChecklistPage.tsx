@@ -15,7 +15,11 @@ import { BulkAddChecks, translateSituacao } from "../Helper";
 import { CheckDto } from "../Classes";
 import Swal from "sweetalert2";
 import { mapCheckToCheckDto } from "../mappers/Check";
-import { ClassAChecks, ClassBChecks } from "../Globals";
+import {
+  ClassBChecks,
+  ClassChecksInstrumentacaoCriterioDeProjeto,
+} from "../Globals";
+import MenuChecklistAddClass from "../components/menus/MenuChecklistAddClass";
 
 type Props = {};
 
@@ -103,8 +107,10 @@ const EditChecklistPage = (props: Props) => {
     fetchData();
   };
 
-  const handleCheckAdd = () => {
+  const handleCheckAdd = (e: React.FormEvent) => {
+    //e.preventDefault();
     const checkInstance = new CheckDto(0, newCheckDescricao, 4, "");
+    console.log(checkInstance);
     AddCheck(checkInstance, checklist!.id);
   };
 
@@ -199,8 +205,8 @@ const EditChecklistPage = (props: Props) => {
       </form>
 
       <form
-        onSubmit={() => {
-          handleCheckAdd();
+        onSubmit={(e) => {
+          handleCheckAdd(e);
         }}
         className="d-flex"
       >
@@ -221,24 +227,13 @@ const EditChecklistPage = (props: Props) => {
         </div>
       </form>
 
-      <div className="d-flex">
-        <button
-          onClick={async () => {
-            await BulkAddChecks(checklist?.id, ClassAChecks, 34);
-            window.location.reload();
-          }}
-        >
-          ClasseA
-        </button>
-        <button
-          onClick={async () => {
-            await BulkAddChecks(checklist?.id, ClassBChecks, 34);
-            window.location.reload();
-          }}
-        >
-          ClasseB
-        </button>
-      </div>
+      {checklist && (
+        <div>
+          <MenuChecklistAddClass
+            checklistId={checklist!.id}
+          ></MenuChecklistAddClass>
+        </div>
+      )}
 
       <ul className="mt-3">
         {checklist?.checks.map((check) => (
