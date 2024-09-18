@@ -6,24 +6,17 @@ import {
   EditCheck,
   EditChecklist,
   GetChecklistById,
-  PostChecklist,
 } from "../api";
-import { Check, Checklist, ChecklistDto } from "../interfaces";
+import { Checklist, ChecklistDto } from "../interfaces";
 import { useLocation } from "react-router-dom";
 import { mapChecklistToChecklistDto } from "../mappers/Checklist";
-import { BulkAddChecks, translateSituacao } from "../Helper";
+import { translateSituacao } from "../Helper";
 import { CheckDto } from "../Classes";
 import Swal from "sweetalert2";
 import { mapCheckToCheckDto } from "../mappers/Check";
-import {
-  ClassBChecks,
-  ClassChecksInstrumentacaoCriterioDeProjeto,
-} from "../Globals";
 import MenuChecklistAddClass from "../components/menus/MenuChecklistAddClass";
 
-type Props = {};
-
-const EditChecklistPage = (props: Props) => {
+const EditChecklistPage = () => {
   const [checklist, setChecklist] = useState<Checklist>();
   const [formData, setFormData] = useState<ChecklistDto>({
     titutlo: "",
@@ -107,7 +100,7 @@ const EditChecklistPage = (props: Props) => {
     fetchData();
   };
 
-  const handleCheckAdd = (e: React.FormEvent) => {
+  const handleCheckAdd = () => {
     //e.preventDefault();
     const checkInstance = new CheckDto(0, newCheckDescricao, 4, "");
     console.log(checkInstance);
@@ -205,8 +198,8 @@ const EditChecklistPage = (props: Props) => {
       </form>
 
       <form
-        onSubmit={(e) => {
-          handleCheckAdd(e);
+        onSubmit={() => {
+          handleCheckAdd();
         }}
         className="d-flex"
       >

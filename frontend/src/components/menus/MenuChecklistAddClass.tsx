@@ -31,6 +31,34 @@ import {
   ChecklistClassInstrumentacaoListasChecks,
   ChecklistClassInstrumentacaoMemorialDeCalculoChecks,
   ChecklistClassInstrumentacaoRequisicaoDeMateriaisChecks,
+  ChecklistClassMecanicaEspecificacaoTecnicaChecks,
+  ChecklistClassMecanicaParecerTecnicoChecks,
+  ChecklistClassMecanicaRequesicaoDeMaterialChecks,
+  ChecklistClassProcessosEspecificacaoTecnicaChecks,
+  ChecklistClassProcessosFluxogramasChecks,
+  ChecklistClassProcessosListaDeLinhasChecks,
+  ChecklistClassProcessosRelatoriosChecks,
+  ChecklistClassSegurancaCriteriosDeProjetoChecks,
+  ChecklistClassSegurancaEspecificacoesTecnicasChecks,
+  ChecklistClassSegurancaEstudosChecks,
+  ChecklistClassSegurancaFolhasDeDadosChecks,
+  ChecklistClassSegurancaPlantaDoSistemaDeCftvESegurancaPatChecks,
+  ChecklistClassSegurancaPlantasGeraisChecks,
+  ChecklistClassSegurancaRequisicaoDeMaterialChecks,
+  ChecklistClassTelecomDesenhosChecks,
+  ChecklistClassTubulacoesCriterioDeProjetoChecks,
+  ChecklistClassTubulacoesDesenhosChecks,
+  ChecklistClassTubulacoesDesenhosPlantaEPerfilChecks,
+  ChecklistClassTubulacoesEspecificacaoTecnicaChecks,
+  ChecklistClassTubulacoesFolhasDeDadosChecks,
+  ChecklistClassTubulacoesIsometricosChecks,
+  ChecklistClassTubulacoesLayoutChecks,
+  ChecklistClassTubulacoesListaDeMateriaisChecks,
+  ChecklistClassTubulacoesListasDeSuportesParaTubulacaoChecks,
+  ChecklistClassTubulacoesMemoriaDeCalculoChecks,
+  ChecklistClassTubulacoesPlantasDeMacrolocalizacaoChecks,
+  ChecklistClassTubulacoesRelatoriosChecks,
+  ChecklistClassTubulacoesRequisicaoDeMateriaisChecks,
 } from "../../Globals";
 
 type Props = {
@@ -327,6 +355,34 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
             onClick={() =>
               setChecklists({
                 ...checklists,
+                GERAL: !checklists.GERAL,
+              })
+            }
+          >
+            GERAL
+          </button>
+          {checklists.GERAL && (
+            <div>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassInstrumentacaoCriterioDeProjetoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                CRITÉRIO DE PROJETO
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <button
+            onClick={() =>
+              setChecklists({
+                ...checklists,
                 INSTRUMENTACAO: !checklists.INSTRUMENTACAO,
               })
             }
@@ -448,9 +504,39 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           </button>
           {checklists.MECANICA && (
             <div>
-              <button>ESPECIFICAÇÃO TÉCNICA</button>
-              <button>PARECER TÉCNICO</button>
-              <button>REQUISIÇÃO DE MATERIAL</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassMecanicaEspecificacaoTecnicaChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ESPECIFICAÇÃO TÉCNICA
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassMecanicaParecerTecnicoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                PARECER TÉCNICO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassMecanicaRequesicaoDeMaterialChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                REQUISIÇÃO DE MATERIAL
+              </button>
             </div>
           )}
         </div>
@@ -465,10 +551,50 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           </button>
           {checklists.PROCESSOS && (
             <div>
-              <button>ESPECIFICAÇÃO TÉNICA</button>
-              <button>FLUXOGRAMAS</button>
-              <button>LISTA DE LINHAS</button>
-              <button>RELATÓRIOS</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassProcessosEspecificacaoTecnicaChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ESPECIFICAÇÃO TÉNICA
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassProcessosFluxogramasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                FLUXOGRAMAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassProcessosListaDeLinhasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTA DE LINHAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassProcessosRelatoriosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                RELATÓRIOS
+              </button>
             </div>
           )}
         </div>
@@ -483,13 +609,83 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           </button>
           {checklists.SEGURANCA && (
             <div>
-              <button>CRITÉRIOS DE PROJETO</button>
-              <button>ESPECIFICAÇÕES TÉCNICAS</button>
-              <button>ESTUDOS</button>
-              <button>FOLHAS DE DADOS</button>
-              <button>PLANTA DO SISTEMA DE CFTV E SEGURANÇA PAT</button>
-              <button>PLANTAS GERAIS</button>
-              <button>REQUISIÇÃO DE MATERIAL</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassSegurancaCriteriosDeProjetoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                CRITÉRIOS DE PROJETO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassSegurancaEspecificacoesTecnicasChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ESPECIFICAÇÕES TÉCNICAS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassSegurancaEstudosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ESTUDOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassSegurancaFolhasDeDadosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                FOLHAS DE DADOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassSegurancaPlantaDoSistemaDeCftvESegurancaPatChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                PLANTA DO SISTEMA DE CFTV E SEGURANÇA PAT
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassSegurancaPlantasGeraisChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                PLANTAS GERAIS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassSegurancaRequisicaoDeMaterialChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                REQUISIÇÃO DE MATERIAL
+              </button>
             </div>
           )}
         </div>
@@ -504,7 +700,17 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           </button>
           {checklists.TELECOM && (
             <div>
-              <button>DESENHOS</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTelecomDesenhosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DESENHOS
+              </button>
             </div>
           )}
         </div>
@@ -522,19 +728,149 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           </button>
           {checklists.TUBULACOES && (
             <div>
-              <button>CRITÉRIO DE PROJETO</button>
-              <button>DESENHOS</button>
-              <button>DESENHOS - PLANTA E PERFIL</button>
-              <button>ESPECIFICAÇÃO TÉCNICA</button>
-              <button>FOLHAS DE DADOS</button>
-              <button>ISOMÉTRICOS</button>
-              <button>LAYOUT</button>
-              <button>LISTA DE MATERIAIS</button>
-              <button>LISTAS DE SUPORTES PARA TUBULAÇÃO</button>
-              <button>MEMÓRIA DE CÁLCULO</button>
-              <button>PLANTAS DE MACROLOCALIZAÇÃO</button>
-              <button>RELATÓRIOS</button>
-              <button>REQUISIÇÃO DE MATERIAIS</button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesCriterioDeProjetoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                CRITÉRIO DE PROJETO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesDesenhosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DESENHOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesDesenhosPlantaEPerfilChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                DESENHOS - PLANTA E PERFIL
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesEspecificacaoTecnicaChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ESPECIFICAÇÃO TÉCNICA
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesFolhasDeDadosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                FOLHAS DE DADOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesIsometricosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                ISOMÉTRICOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesLayoutChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LAYOUT
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesListaDeMateriaisChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTA DE MATERIAIS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesListasDeSuportesParaTubulacaoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                LISTAS DE SUPORTES PARA TUBULAÇÃO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesMemoriaDeCalculoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                MEMÓRIA DE CÁLCULO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesPlantasDeMacrolocalizacaoChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                PLANTAS DE MACROLOCALIZAÇÃO
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesRelatoriosChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                RELATÓRIOS
+              </button>
+              <button
+                onClick={() => {
+                  BulkAddChecks(
+                    checklistId,
+                    ChecklistClassTubulacoesRequisicaoDeMateriaisChecks
+                  );
+                  window.location.reload();
+                }}
+              >
+                REQUISIÇÃO DE MATERIAIS
+              </button>
             </div>
           )}
         </div>
