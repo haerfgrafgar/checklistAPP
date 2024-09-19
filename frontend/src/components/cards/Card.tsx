@@ -6,14 +6,9 @@ import { useNavigate } from "react-router";
 type Props = {
   id: number;
   searchResult: Checklist;
-  onPropDrilling: (e: SyntheticEvent) => void;
 };
 
-const Card: React.FC<Props> = ({
-  id,
-  searchResult,
-  onPropDrilling,
-}: Props): JSX.Element => {
+const Card: React.FC<Props> = ({ id, searchResult }: Props): JSX.Element => {
   return (
     <div className="card">
       <div className="details">
@@ -23,10 +18,7 @@ const Card: React.FC<Props> = ({
         <p>{searchResult.revisao}</p>
       </div>
       <p>{searchResult.titutlo}</p>
-      <AddChecklistForm
-        onPropDrilling={onPropDrilling}
-        id={searchResult.id}
-      ></AddChecklistForm>
+      <AddChecklistForm id={searchResult.id}></AddChecklistForm>
     </div>
   );
 };

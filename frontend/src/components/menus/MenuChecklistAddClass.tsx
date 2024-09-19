@@ -22,6 +22,7 @@ import {
   ChecklistClassEletricaProcedimentosDeMedicaoChecks,
   ChecklistClassEletricaRelatoriosChecks,
   ChecklistClassEletricaRequisicoesDeMaterial,
+  ChecklistClassGeralChecklistQualidadeChecks,
   ChecklistClassInstrumentacaoCriterioDeProjetoChecks,
   ChecklistClassInstrumentacaoDesenhosChecks,
   ChecklistClassInstrumentacaoDiagramaDeInterligacaoChecks,
@@ -367,7 +368,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
-                    ChecklistClassInstrumentacaoCriterioDeProjetoChecks
+                    ChecklistClassGeralChecklistQualidadeChecks
                   );
                   window.location.reload();
                 }}

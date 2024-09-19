@@ -2,11 +2,10 @@ import React, { SyntheticEvent } from "react";
 import { useNavigate } from "react-router";
 
 type Props = {
-  onPropDrilling: (e: SyntheticEvent) => void;
   id: number;
 };
 
-const AddChecklistForm = ({ onPropDrilling, id }: Props) => {
+const AddChecklistForm = ({ id }: Props) => {
   const navigate = useNavigate();
 
   const onClickRespond = (id: number) => {

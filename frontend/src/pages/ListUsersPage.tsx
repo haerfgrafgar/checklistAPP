@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { GetAllAssignedChecklists, GetAllUsers } from "../api";
+import { useEffect, useState } from "react";
+import { GetAllUsers } from "../api";
 import { AccountDto } from "../interfaces";
 import { useNavigate } from "react-router";
 
-type Props = {};
-
-const ListUsersPage = (props: Props) => {
+const ListUsersPage = () => {
   const navigate = useNavigate();
   const [searchResult, setSearchResult] = useState<AccountDto[]>([]);
   const [serverError, setServerError] = useState<string>("");
@@ -32,11 +30,18 @@ const ListUsersPage = (props: Props) => {
 
   return (
     <div>
-      {searchResult.map((user) => (
-        <button key={user.username} onClick={() => handleClick(user.username)}>
-          {user.username}
-        </button>
-      ))}
+      {serverError ? (
+        <p>{serverError}</p>
+      ) : (
+        searchResult.map((user) => (
+          <button
+            key={user.username}
+            onClick={() => handleClick(user.username)}
+          >
+            {user.username}
+          </button>
+        ))
+      )}
     </div>
   );
 };

@@ -70,3 +70,6 @@ export const BulkAddChecks = async (
     await AddCheck(thisCheck, checklistId);
   });
 };
+
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));

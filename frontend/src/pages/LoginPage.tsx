@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../Context/useAuth";
 import { useNavigate } from "react-router";
+import { sleep } from "../Helper";
 
 type Props = {};
 
@@ -28,7 +29,7 @@ const LoginPage = (props: Props) => {
 
   const handleLogin = async (form: LoginFormsInputs) => {
     await loginUser(form.userName, form.password);
-    await navigate("/checklists");
+    navigate("/checklists");
   };
   return (
     <section>
@@ -57,13 +58,7 @@ const LoginPage = (props: Props) => {
                 />
                 {errors.password ? <p>{errors.password.message}</p> : ""}
               </div>
-              <div>
-                <a href="#">Forgot password?</a>
-              </div>
               <button type="submit">Sign in</button>
-              <p>
-                Dont have an account yet? <a href="#">Sign up</a>
-              </p>
             </form>
           </div>
         </div>
