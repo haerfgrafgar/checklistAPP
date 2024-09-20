@@ -14,8 +14,13 @@ const Navbar: React.FC = () => {
       </div>
       <ul className="navbar-links">
         <li>
+          <a href="/checklists/verificador" className="navbar-item">
+            Verificador
+          </a>
+        </li>
+        <li>
           <a href="/checklists" className="navbar-item">
-            Checklists
+            Executante
           </a>
         </li>
         <li>

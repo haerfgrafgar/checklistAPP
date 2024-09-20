@@ -26,10 +26,27 @@ export const GetAllChecklists = async () => {
   }
 };
 
-export const GetAllAssignedChecklists = async (username: string) => {
+export const GetAllAssignedChecklistsExecutante = async (username: string) => {
   try {
     const data = await axios.get<SearchResponse>(
       BASE_API + "api/checklist/" + username
+    );
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return error.message;
+    } else {
+      console.log("unexpected error: ", error);
+      return "UNEXPECTED ERROR!";
+    }
+  }
+};
+
+export const GetAllAssignedChecklistsVerificador = async (username: string) => {
+  try {
+    const data = await axios.get<SearchResponse>(
+      BASE_API + "api/checklist/verificador/" + username
     );
     return data;
   } catch (error) {
@@ -250,6 +267,23 @@ export const DeleteCheck = async (id: number): Promise<void> => {
 export const GetAllUsers = async () => {
   try {
     const data = await axios.get<SearchResponse>(BASE_API + "api/account");
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return error.message;
+    } else {
+      console.log("unexpected error: ", error);
+      return "UNEXPECTED ERROR!";
+    }
+  }
+};
+
+export const EnviarParaAprovacao = async (id: number) => {
+  try {
+    const data = await axios.put<Checklist>(
+      BASE_API + "api/checklist/enviar/" + id
+    );
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

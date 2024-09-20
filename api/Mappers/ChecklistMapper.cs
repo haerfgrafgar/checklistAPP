@@ -23,7 +23,11 @@ namespace api.Mappers
                 Verificador = checklist.Verificador,
                 Executante = checklist.Executante,
                 DueDate = checklist.DueDate,
-                Checks = checklist.Checks?.Select(checks => checks.ToCheckDto()).ToList()
+                Checks = checklist.Checks?.Select(checks => checks.ToCheckDto()).ToList(),
+                Caminho = checklist.Caminho,
+                Emitido = checklist.Emitido,
+                ParaVerificar = checklist.ParaVerificar,
+                Versao = checklist.Versao,
             };
         }
 
@@ -40,7 +44,14 @@ namespace api.Mappers
                 Verificador = checklistDto.Verificador,
                 Executante = checklistDto.Executante,
                 CreatedOn = checklistDto.CreatedOn,
-                DueDate = checklistDto.DueDate
+                DueDate = checklistDto.DueDate,
+                Caminho = checklistDto.Caminho,
+                Emitido = checklistDto.Emitido,
+                ParaVerificar = checklistDto.ParaVerificar,
+                Versao = checklistDto.Versao,
+                AnteriorId = checklistDto.AnteriorId,
+                AppUserIdCord = "",
+                AppUserIdExec = "",
             };
         }
     }

@@ -60,6 +60,17 @@ namespace api.Controllers
             return Ok(checklistDto);
         }
 
+        [HttpGet("verificador/{username}")]
+        [Authorize]
+        public async Task<IActionResult> GetAllAssignedVerificador([FromRoute] string username)
+        {
+            var checklist = await _checklistRepo.GetAllAssignedVerificadorAsync(username);
+
+            var checklistDto = checklist.Select(checklist => checklist.toChecklistDto()).ToList();
+
+            return Ok(checklist);
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateChecklistRequestDto checklistDto)
@@ -92,6 +103,18 @@ namespace api.Controllers
                 return BadRequest(ModelState);
 
             var checklistModel = await _checklistRepo.UpdateAsync(id, checklistDto);
+
+            if (checklistModel == null)
+                return NotFound("Checklist does not exist.");
+
+            return Ok(checklistModel.toChecklistDto());
+        }
+
+        [HttpPut("enviar/{id:int}")]
+        [Authorize]
+        public async Task<IActionResult> EnviarParaAprovacao([FromRoute] int id)
+        {
+            var checklistModel = await _checklistRepo.EnviarParaAprovacao(id);
 
             if (checklistModel == null)
                 return NotFound("Checklist does not exist.");

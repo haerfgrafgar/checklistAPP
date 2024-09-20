@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
-import { GetCheckById, GetChecklistById, RespondCheck } from "../api";
+import {
+  EnviarParaAprovacao,
+  GetCheckById,
+  GetChecklistById,
+  RespondCheck,
+} from "../api";
 import { Check, Checklist } from "../interfaces";
 import { mapCheckToRespondCheckDto } from "../mappers/Check";
 import { translateSituacao } from "../Helper";
@@ -9,12 +14,12 @@ import Swal from "sweetalert2";
 type Props = {};
 
 const ChecklistDetailsPage = (props: Props) => {
+  const [isChecklistCompleted, setIsChecklistCompleted] =
+    useState<boolean>(false);
   const [checklist, setChecklist] = useState<Checklist>();
   const id = Number(useLocation().pathname.slice(20));
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<string[]>([]);
-
-  const [toRespond, setToRespond] = useState<Check[]>([]);
 
   const buttonRefJump = useRef<HTMLButtonElement>(null);
   const buttonRefPrev = useRef<HTMLButtonElement>(null);
@@ -53,13 +58,18 @@ const ChecklistDetailsPage = (props: Props) => {
     }
   };
 
+  const handleOnEnviar = async () => {
+    EnviarParaAprovacao(checklist!.id);
+  };
+
   async function fetchData() {
     try {
       const data = await GetChecklistById(id);
       if (typeof data === "string") {
         return 0;
       }
-      setChecklist(data.data);
+      await setChecklist(data.data);
+      return;
     } catch (error) {
       console.log(error);
     }
@@ -113,18 +123,40 @@ const ChecklistDetailsPage = (props: Props) => {
   useEffect(() => {
     if (checklist !== undefined) {
       setQuestions(checklist?.checks.map((check) => check.descricao));
-      setToRespond(
-        checklist.checks
-          .filter((check) => check.situacao === 2 || check.situacao === 4)
-          .map((check) => check)
-      );
     }
   }, [checklist]);
 
+  useEffect(() => {
+    if (currentQuestionIndex === checklist?.checks.length) {
+      const completed = checklist.checks.every((check) => {
+        return check.situacao === 1 || check.situacao === 3;
+      });
+      setIsChecklistCompleted(completed);
+    }
+  }, [currentQuestionIndex, checklist?.checks.length]);
+
+  // useEffect(() => {
+  //   if (checklist?.checks[0].situacao === 1) {
+  //     handleNext();
+  //   }
+  // }, [questions]);
+
   const handleNext = () => {
     if (currentQuestionIndex <= questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      let index = currentQuestionIndex + 1;
+
+      while (
+        (checklist?.checks[index]?.situacao === 1 ||
+          checklist?.checks[index]?.situacao === 3) &&
+        index <= questions.length - 1
+      ) {
+        console.log("loop");
+        index += 1;
+      }
+
+      setCurrentQuestionIndex(index);
     }
+    //BUT MAYBE NOT AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     fetchData();
   };
 
@@ -147,6 +179,7 @@ const ChecklistDetailsPage = (props: Props) => {
           <p className="m-0">Revisao: {checklist?.revisao}</p>
           <p className="m-0">Titulo: {checklist?.titutlo}</p>
           <p className="m-0">Verificador: {checklist?.verificador}</p>
+          <p className="m-0">Executante: {checklist?.executante}</p>
           <p className="m-0">CreatedOn: {checklist?.createdOn}</p>
           <p className="m-0">DueDate: {checklist?.dueDate}</p>
 
@@ -274,6 +307,14 @@ const ChecklistDetailsPage = (props: Props) => {
           <p>
             Item {currentQuestionIndex + 1} / {questions.length}
           </p>
+        </div>
+      )}
+
+      {isChecklistCompleted && (
+        <div>
+          <button onClick={handleOnEnviar}>
+            <h1>ENVIAR</h1>
+          </button>
         </div>
       )}
     </>

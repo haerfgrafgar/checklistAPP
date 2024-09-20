@@ -1,23 +1,18 @@
 import { useEffect, useState } from "react";
 import { Checklist } from "../interfaces";
-import { GetAllAssignedChecklistsExecutante } from "../api";
+import { GetAllAssignedChecklistsVerificador } from "../api";
+
 import CardList from "../components/CardList/CardList";
 import { getToken } from "../Helper";
-import { useParams } from "react-router-dom";
+import ChecklistList from "../components/Checklist/ChecklistList";
 
-const ListUserChecklistsPage = () => {
+const ListChecklistsVerificadorPage = () => {
   const token = getToken();
-  const { username } = useParams<{ username: string }>();
   const [searchResult, setSearchResult] = useState<Checklist[]>([]);
   const [serverError, setServerError] = useState<string>("");
 
   const makeApiRequest = async () => {
-    if (username == null) {
-      console.log("Username not found.");
-      return;
-    }
-
-    const result = await GetAllAssignedChecklistsExecutante(username);
+    const result = await GetAllAssignedChecklistsVerificador(token!.given_name);
 
     if (typeof result === "string") {
       setServerError(result);
@@ -34,9 +29,10 @@ const ListUserChecklistsPage = () => {
   return (
     <>
       {serverError && <h1>{serverError}</h1>}
-      <CardList searchResults={searchResult} />
+      <h1>VERIFICADOR:</h1>
+      <ChecklistList checklists={searchResult}></ChecklistList>
     </>
   );
 };
 
-export default ListUserChecklistsPage;
+export default ListChecklistsVerificadorPage;

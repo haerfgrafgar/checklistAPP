@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Checklist } from "../interfaces";
-import { GetAllAssignedChecklists } from "../api";
+import { GetAllAssignedChecklistsExecutante } from "../api";
 
 import CardList from "../components/CardList/CardList";
 import { getToken } from "../Helper";
+import ChecklistList from "../components/Checklist/ChecklistList";
 
 const ListChecklistsPage = () => {
   const token = getToken();
@@ -11,7 +12,7 @@ const ListChecklistsPage = () => {
   const [serverError, setServerError] = useState<string>("");
 
   const makeApiRequest = async () => {
-    const result = await GetAllAssignedChecklists(token!.given_name);
+    const result = await GetAllAssignedChecklistsExecutante(token!.given_name);
 
     if (typeof result === "string") {
       setServerError(result);
@@ -28,11 +29,8 @@ const ListChecklistsPage = () => {
   return (
     <>
       {serverError && <h1>{serverError}</h1>}
-      {!(searchResult.length === 0) ? (
-        <CardList searchResults={searchResult} />
-      ) : (
-        <p>No results</p>
-      )}
+      <h1>EXECUTANTE:</h1>
+      <ChecklistList checklists={searchResult}></ChecklistList>
     </>
   );
 };

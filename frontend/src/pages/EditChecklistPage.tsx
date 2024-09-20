@@ -30,6 +30,7 @@ const EditChecklistPage = () => {
     dueDate: "",
   });
   const [newCheckDescricao, setNewCheckDescricao] = useState<string>("");
+
   const id = Number(useLocation().pathname.slice(17));
 
   async function fetchData() {
@@ -172,6 +173,17 @@ const EditChecklistPage = () => {
               type="text"
               name="verificador"
               value={formData.verificador}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Executante:
+            <input
+              type="text"
+              name="executante"
+              value={formData.executante}
               onChange={handleChange}
             />
           </label>

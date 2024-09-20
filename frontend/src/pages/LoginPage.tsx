@@ -29,7 +29,7 @@ const LoginPage = (props: Props) => {
 
   const handleLogin = async (form: LoginFormsInputs) => {
     await loginUser(form.userName, form.password);
-    navigate("/checklists");
+    navigate("/");
   };
   return (
     <section>

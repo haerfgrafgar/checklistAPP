@@ -32,6 +32,12 @@ export interface Checklist {
   revisao: number;
   titutlo: string;
   verificador: string;
+  executante: string;
+  versao: number;
+  anteriorId: number;
+  paraVerificar: boolean;
+  emitido: boolean;
+  caminho: string;
   createdOn: string;
   dueDate: string;
   checks: Check[];

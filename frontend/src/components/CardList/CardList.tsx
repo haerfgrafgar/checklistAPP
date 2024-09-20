@@ -1,5 +1,5 @@
 import React, { SyntheticEvent } from "react";
-import Card from "../cards/Card";
+import Card from "./cards/Card";
 import { Checklist } from "../../interfaces";
 import { v4 as uuidv4 } from "uuid";
 

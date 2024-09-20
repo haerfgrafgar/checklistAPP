@@ -26,6 +26,12 @@ namespace api.Dtos.Checklist
         public required string Verificador { get; set; }
         [Required]
         public required string Executante { get; set; }
+        public int Versao { get; set; } = 1;
+        public int AnteriorId { get; set; } = 0;
+        public bool ParaVerificar { get; set; } = false;
+        public bool Emitido { get; set; } = false;
+        [Required]
+        public required string Caminho { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime DueDate { get; set; }
     }

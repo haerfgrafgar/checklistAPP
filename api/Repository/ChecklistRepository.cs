@@ -49,6 +49,21 @@ namespace api.Repository
             return existingChecklist;
         }
 
+        public async Task<Checklist?> EnviarParaAprovacao(int id)
+        {
+            var existingChecklist = await _context.Checklist.FindAsync(id);
+
+            if (existingChecklist == null)
+                return null;
+
+            existingChecklist.Versao += 1;
+            existingChecklist.ParaVerificar = true;
+
+            await _context.SaveChangesAsync();
+
+            return existingChecklist;
+        }
+
         public async Task<List<Checklist>> GetAllAssignedAsync(string username)
         {
             var appUser = _userManager.FindByNameAsync(username).Result;
@@ -56,8 +71,23 @@ namespace api.Repository
             {
 
                 return await _context.Checklist
-                    .Include(x => x.Checks)
-                    .Where(x => x.AppUserIdExec == appUser.Id)
+                    .Where(x => x.AppUserIdExec == appUser.Id && x.ParaVerificar == false)
+                    .ToListAsync();
+            }
+            catch
+            {
+                return [];
+            }
+        }
+
+        public async Task<List<Checklist>> GetAllAssignedVerificadorAsync(string username)
+        {
+            var appUser = _userManager.FindByNameAsync(username).Result;
+            try
+            {
+
+                return await _context.Checklist
+                    .Where(x => x.AppUserIdCord == appUser.Id && x.ParaVerificar == true)
                     .ToListAsync();
             }
             catch

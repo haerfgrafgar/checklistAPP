@@ -12,5 +12,6 @@ export const mapChecklistToChecklistDto = (
     revisao: checklist.revisao,
     titutlo: checklist.titutlo,
     verificador: checklist.verificador,
+    executante: checklist.executante,
   };
 };

@@ -1,6 +1,6 @@
 import { SyntheticEvent } from "react";
-import { Checklist } from "../../interfaces";
-import AddChecklistForm from "../forms/CheckButtons";
+import { Checklist } from "../../../interfaces";
+import AddChecklistForm from "../../forms/CheckButtons";
 import { useNavigate } from "react-router";
 
 type Props = {

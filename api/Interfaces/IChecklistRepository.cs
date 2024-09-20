@@ -12,9 +12,11 @@ namespace api.Interfaces
         Task<List<Checklist>> GetAllAsync();
         Task<Checklist?> GetByIdAsync(int id);
         Task<List<Checklist>> GetAllAssignedAsync(string username);
+        Task<List<Checklist>> GetAllAssignedVerificadorAsync(string username);
         Task<bool> ChecklistExists(int id);
         Task<Checklist?> DeleteAsync(int id);
         Task<Checklist> CreateAsync(Checklist checklist);
         Task<Checklist?> UpdateAsync(int id, UpdateChecklistRequestDto checklistDto);
+        Task<Checklist?> EnviarParaAprovacao(int id);
     }
 }
