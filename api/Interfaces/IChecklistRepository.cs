@@ -18,5 +18,8 @@ namespace api.Interfaces
         Task<Checklist> CreateAsync(Checklist checklist);
         Task<Checklist?> UpdateAsync(int id, UpdateChecklistRequestDto checklistDto);
         Task<Checklist?> EnviarParaAprovacao(int id);
+        Task<Checklist?> RejeitarChecklist(int id);
+        Task<Checklist> CloneChecklistAsync(Checklist checklist);
+        Task<List<Checklist>> GetOlderVersions(int id);
     }
 }

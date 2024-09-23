@@ -30,7 +30,10 @@ const ListChecklistsVerificadorPage = () => {
     <>
       {serverError && <h1>{serverError}</h1>}
       <h1>VERIFICADOR:</h1>
-      <ChecklistList checklists={searchResult}></ChecklistList>
+      <ChecklistList
+        checklists={searchResult}
+        verificador={true}
+      ></ChecklistList>
     </>
   );
 };

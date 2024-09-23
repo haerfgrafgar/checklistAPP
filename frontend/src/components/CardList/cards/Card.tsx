@@ -6,9 +6,14 @@ import { useNavigate } from "react-router";
 type Props = {
   id: number;
   searchResult: Checklist;
+  verificador?: boolean;
 };
 
-const Card: React.FC<Props> = ({ id, searchResult }: Props): JSX.Element => {
+const Card: React.FC<Props> = ({
+  id,
+  searchResult,
+  verificador,
+}: Props): JSX.Element => {
   return (
     <div className="card">
       <div className="details">
@@ -18,7 +23,10 @@ const Card: React.FC<Props> = ({ id, searchResult }: Props): JSX.Element => {
         <p>{searchResult.revisao}</p>
       </div>
       <p>{searchResult.titutlo}</p>
-      <AddChecklistForm id={searchResult.id}></AddChecklistForm>
+      <AddChecklistForm
+        id={searchResult.id}
+        verificador={verificador}
+      ></AddChecklistForm>
     </div>
   );
 };

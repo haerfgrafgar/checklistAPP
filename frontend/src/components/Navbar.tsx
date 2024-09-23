@@ -13,11 +13,13 @@ const Navbar: React.FC = () => {
         </a>
       </div>
       <ul className="navbar-links">
-        <li>
-          <a href="/checklists/verificador" className="navbar-item">
-            Verificador
-          </a>
-        </li>
+        {token?.role === "Admin" && (
+          <li>
+            <a href="/checklists/verificador" className="navbar-item">
+              Verificador
+            </a>
+          </li>
+        )}
         <li>
           <a href="/checklists" className="navbar-item">
             Executante

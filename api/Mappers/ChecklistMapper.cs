@@ -28,6 +28,7 @@ namespace api.Mappers
                 Emitido = checklist.Emitido,
                 ParaVerificar = checklist.ParaVerificar,
                 Versao = checklist.Versao,
+                AnteriorId = checklist.AnteriorId,
             };
         }
 
@@ -52,6 +53,28 @@ namespace api.Mappers
                 AnteriorId = checklistDto.AnteriorId,
                 AppUserIdCord = "",
                 AppUserIdExec = "",
+            };
+        }
+
+        public static CreateChecklistRequestDto ToCreateDtoFromChecklist(this Checklist checklistDto)
+        {
+            return new CreateChecklistRequestDto
+            {
+                NumDestaLV = checklistDto.NumDestaLV,
+                NumContrato = checklistDto.NumContrato,
+                NumDocumento = checklistDto.NumDocumento,
+                Projeto = checklistDto.Projeto,
+                Revisao = checklistDto.Revisao,
+                Titutlo = checklistDto.Titutlo,
+                Verificador = checklistDto.Verificador,
+                Executante = checklistDto.Executante,
+                CreatedOn = checklistDto.CreatedOn,
+                DueDate = checklistDto.DueDate,
+                Caminho = checklistDto.Caminho,
+                Emitido = checklistDto.Emitido,
+                ParaVerificar = checklistDto.ParaVerificar,
+                Versao = checklistDto.Versao,
+                AnteriorId = checklistDto.AnteriorId,
             };
         }
     }

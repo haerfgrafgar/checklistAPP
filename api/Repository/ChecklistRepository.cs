@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.Checklist;
 using api.Helpers;
 using api.Interfaces;
+using api.Mappers;
 using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,13 +17,40 @@ namespace api.Repository
     {
         private readonly ApplicationDBContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly ICheckRepository _checkRepo;
 
-        public ChecklistRepository(ApplicationDBContext context, UserManager<AppUser> userManager)
+        public ChecklistRepository(ApplicationDBContext context, UserManager<AppUser> userManager, ICheckRepository checkRepo)
         {
             _userManager = userManager;
             _context = context;
+            _checkRepo = checkRepo;
         }
+        public async Task<Checklist> CloneChecklistAsync(Checklist checklist)
+        {
+            var newChecklist = await CreateAsync(checklist.ToCreateDtoFromChecklist().ToChecklistFromCreateDto());
 
+            var checkInstance = new Check
+            {
+                ChecklistId = newChecklist.Id,
+                Item = 0,
+                Descricao = "",
+                Situacao = 0,
+                Motivo = ""
+            };
+
+            for (int i = 0; i < checklist.Checks.Count; i++)
+            {
+                checkInstance.Descricao = checklist.Checks[i].Descricao;
+                checkInstance.Motivo = checklist.Checks[i].Motivo;
+                checkInstance.Item = checklist.Checks[i].Item;
+                checkInstance.Situacao = checklist.Checks[i].Situacao;
+
+                await _checkRepo.CreateAsync(checkInstance.ToCreateCheckDto().ToCheckFromCreateDTO(newChecklist.Id));
+            }
+
+            newChecklist.AnteriorId = checklist.Id;
+            return newChecklist;
+        }
         public async Task<bool> ChecklistExists(int id)
         {
             return await _context.Checklist.AnyAsync(checklist => checklist.Id == id);
@@ -62,6 +90,27 @@ namespace api.Repository
             await _context.SaveChangesAsync();
 
             return existingChecklist;
+        }
+
+        public async Task<Checklist?> RejeitarChecklist(int id)
+        {
+            var checklist = await GetByIdAsync(id);
+
+            if (checklist == null)
+                return null;
+
+            var newChecklist = await CloneChecklistAsync(checklist);
+
+            newChecklist.Versao += 1;
+            newChecklist.ParaVerificar = false;
+            newChecklist.AnteriorId = id;
+
+            checklist.Executante = "";
+            checklist.Verificador = "";
+
+            await _context.SaveChangesAsync();
+
+            return newChecklist;
         }
 
         public async Task<List<Checklist>> GetAllAssignedAsync(string username)
@@ -125,6 +174,27 @@ namespace api.Repository
             await _context.SaveChangesAsync();
 
             return existingChecklist.Result;
+        }
+
+        public async Task<List<Checklist>> GetOlderVersions(int id)
+        {
+            List<Checklist> anteriores = new List<Checklist>();
+
+            var currentChecklist = await GetByIdAsync(id);
+
+            if (currentChecklist == null)
+            {
+                return anteriores;
+            }
+
+            while (currentChecklist.AnteriorId != 0)
+            {
+                currentChecklist = await GetByIdAsync(currentChecklist.AnteriorId);
+                if (currentChecklist != null)
+                    anteriores.Add(currentChecklist);
+            }
+
+            return anteriores;
         }
     }
 }

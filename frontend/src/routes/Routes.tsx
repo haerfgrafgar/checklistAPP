@@ -10,6 +10,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import ListUsersPage from "../pages/ListUsersPage";
 import ListUserChecklistsPage from "../pages/ListUserChecklistsPage";
 import ListChecklistsVerificadorPage from "../pages/ListChecklistsVerificadorPage";
+import VerifyChecklistPage from "../pages/VerifyChecklistPage";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <ListChecklistsVerificadorPage />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "checklists/verificador/:id",
+        element: (
+          <ProtectedRoutes>
+            <VerifyChecklistPage />
           </ProtectedRoutes>
         ),
       },

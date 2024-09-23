@@ -71,6 +71,15 @@ namespace api.Controllers
             return Ok(checklist);
         }
 
+        [HttpGet("anteriores/{id:int}")]
+        [Authorize]
+        public async Task<IActionResult> GetAllOlderVersions([FromRoute] int id)
+        {
+            var checklists = await _checklistRepo.GetOlderVersions(id);
+            var checklistsDto = checklists.Select(checklist => checklist.toChecklistDto()).ToList();
+            return Ok(checklistsDto);
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateChecklistRequestDto checklistDto)
@@ -96,7 +105,7 @@ namespace api.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateChecklistRequestDto checklistDto)
         {
             if (!ModelState.IsValid)
@@ -122,8 +131,20 @@ namespace api.Controllers
             return Ok(checklistModel.toChecklistDto());
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpPut("rejeitar/{id:int}")]
         [Authorize]
+        public async Task<IActionResult> Rejeitar([FromRoute] int id)
+        {
+            var checklistModel = await _checklistRepo.RejeitarChecklist(id);
+
+            if (checklistModel == null)
+                return NotFound("Checklist does not exist.");
+
+            return Ok(checklistModel.toChecklistDto());
+        }
+
+        [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var checklist = await _checklistRepo.DeleteAsync(id);

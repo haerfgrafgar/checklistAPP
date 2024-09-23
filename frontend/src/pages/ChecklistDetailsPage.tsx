@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import {
   EnviarParaAprovacao,
   GetCheckById,
@@ -27,6 +27,8 @@ const ChecklistDetailsPage = (props: Props) => {
   const buttonRefNC = useRef<HTMLButtonElement>(null);
   const buttonRefNA = useRef<HTMLButtonElement>(null);
   const buttonRefP = useRef<HTMLButtonElement>(null);
+
+  const navigate = useNavigate();
 
   const checkOnClickUpdate = async (check: Check, choice: number) => {
     if (choice === 2 || choice === 4) {
@@ -59,7 +61,8 @@ const ChecklistDetailsPage = (props: Props) => {
   };
 
   const handleOnEnviar = async () => {
-    EnviarParaAprovacao(checklist!.id);
+    await EnviarParaAprovacao(checklist!.id);
+    navigate("/");
   };
 
   async function fetchData() {

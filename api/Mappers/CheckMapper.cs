@@ -34,6 +34,17 @@ namespace api.Mappers
             };
         }
 
+        public static CreateCheckRequestDto ToCreateCheckDto(this Check checkDto)
+        {
+            return new CreateCheckRequestDto
+            {
+                Item = checkDto.Item,
+                Situacao = checkDto.Situacao,
+                Descricao = checkDto.Descricao,
+                Motivo = checkDto.Motivo,
+            };
+        }
+
         public static RespondCheckRequestDto toRespondFromCheck(this Check check)
         {
             return new RespondCheckRequestDto
