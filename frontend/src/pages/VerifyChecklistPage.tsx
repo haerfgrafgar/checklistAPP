@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import {
   EnviarParaAprovacao,
+  GetAllAnterioresChecklist,
   GetCheckById,
   GetChecklistById,
+  RejeitarChecklist,
   RespondCheck,
 } from "../api";
 import { Check, Checklist } from "../interfaces";
@@ -17,6 +19,8 @@ const ChecklistDetailsPage = (props: Props) => {
   const [isChecklistCompleted, setIsChecklistCompleted] =
     useState<boolean>(false);
   const [checklist, setChecklist] = useState<Checklist>();
+  const [anterioresChecklists, setAnterioresChecklists] =
+    useState<Checklist[]>();
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -57,7 +61,13 @@ const ChecklistDetailsPage = (props: Props) => {
   };
 
   const onClickRejeitar = async () => {
+    await RejeitarChecklist(checklist!.id);
     navigate("/");
+  };
+
+  const handleSituacaoOnClick = (motivo: string) => {
+    if (motivo === "") return;
+    Swal.fire(motivo);
   };
 
   async function fetchData() {
@@ -66,8 +76,14 @@ const ChecklistDetailsPage = (props: Props) => {
       if (typeof data === "string") {
         return 0;
       }
-      console.log(data.data);
-      await setChecklist(data.data);
+      setChecklist(data.data);
+
+      const anterioresChecklistsData = await GetAllAnterioresChecklist(id);
+      if (typeof anterioresChecklistsData === "string") {
+        return 0;
+      }
+      setAnterioresChecklists(anterioresChecklistsData.data);
+
       return;
     } catch (error) {
       console.log(error);
@@ -77,6 +93,10 @@ const ChecklistDetailsPage = (props: Props) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log(checklist);
+  }, [checklist]);
 
   useEffect(() => {
     var completed;
@@ -98,6 +118,7 @@ const ChecklistDetailsPage = (props: Props) => {
         <p className="m-0">NumDocumento: {checklist?.numDocumento}</p>
         <p className="m-0">Projeto: {checklist?.projeto}</p>
         <p className="m-0">Revisao: {checklist?.revisao}</p>
+        <p className="m-0">Versao: {checklist?.versao}</p>
         <p className="m-0">Titulo: {checklist?.titutlo}</p>
         <p className="m-0">Verificador: {checklist?.verificador}</p>
         <p className="m-0">Executante: {checklist?.executante}</p>
@@ -110,11 +131,30 @@ const ChecklistDetailsPage = (props: Props) => {
           {checklist?.checks.map((check) => (
             <li className="d-flex" key={check.id}>
               <div className="ms-5">{check.item}</div>
+
               <div className="ms-5 w-50">{check.descricao}</div>
-              <div className="ms-5 w-25">
-                {translateSituacao(check.situacao)}
+              <div className="ms-5 w-25 d-flex">
+                {anterioresChecklists?.map((checklist) => (
+                  <button
+                    onClick={() =>
+                      handleSituacaoOnClick(
+                        checklist.checks[check.item - 1].motivo
+                      )
+                    }
+                    className="me-3 btn"
+                    key={checklist.checks[check.item - 1].id}
+                  >
+                    {translateSituacao(
+                      checklist.checks[check.item - 1].situacao
+                    )}
+                  </button>
+                ))}
+                <button className="btn">
+                  {translateSituacao(check.situacao)}
+                </button>
               </div>
-              <div className="ms-5 w-25">
+
+              <div className="ms-5 me-3">
                 <div className="d-flex">
                   <button
                     onClick={() => {
@@ -159,7 +199,7 @@ const ChecklistDetailsPage = (props: Props) => {
             </button>
           </div>
         )}
-        <button>
+        <button onClick={onClickRejeitar}>
           <h1>REJEITAR</h1>
         </button>
       </div>

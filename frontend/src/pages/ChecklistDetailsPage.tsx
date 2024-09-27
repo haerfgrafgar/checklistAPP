@@ -54,7 +54,6 @@ const ChecklistDetailsPage = (props: Props) => {
       });
     } else {
       check.situacao = choice;
-      check.motivo = "";
       await RespondCheck(check.id, mapCheckToRespondCheckDto(check));
       handleNext();
     }
@@ -126,6 +125,7 @@ const ChecklistDetailsPage = (props: Props) => {
   useEffect(() => {
     if (checklist !== undefined) {
       setQuestions(checklist?.checks.map((check) => check.descricao));
+      console.log(checklist);
     }
   }, [checklist]);
 
@@ -169,6 +169,11 @@ const ChecklistDetailsPage = (props: Props) => {
     }
   };
 
+  const handleSituacaoOnClick = (motivo: string) => {
+    if (motivo === "") return;
+    Swal.fire(motivo);
+  };
+
   return (
     <>
       {currentQuestionIndex === checklist?.checks.length && (
@@ -180,6 +185,7 @@ const ChecklistDetailsPage = (props: Props) => {
           <p className="m-0">NumDocumento: {checklist?.numDocumento}</p>
           <p className="m-0">Projeto: {checklist?.projeto}</p>
           <p className="m-0">Revisao: {checklist?.revisao}</p>
+          <p className="m-0">Versao: {checklist?.versao}</p>
           <p className="m-0">Titulo: {checklist?.titutlo}</p>
           <p className="m-0">Verificador: {checklist?.verificador}</p>
           <p className="m-0">Executante: {checklist?.executante}</p>
@@ -193,9 +199,14 @@ const ChecklistDetailsPage = (props: Props) => {
               <li className="d-flex" key={check.id}>
                 <div className="ms-5">{check.item}</div>
                 <div className="ms-5 w-50">{check.descricao}</div>
-                <div className="ms-5 w-25">
+                <button
+                  className="ms-5 w-25 btn"
+                  onClick={() => {
+                    handleSituacaoOnClick(check.motivo);
+                  }}
+                >
                   {translateSituacao(check.situacao)}
-                </div>
+                </button>
                 <div className="ms-5 w-25">
                   <div className="d-flex">
                     <button

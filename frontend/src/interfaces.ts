@@ -53,6 +53,11 @@ export interface ChecklistDto {
   verificador: string;
   executante: string;
   dueDate: string;
+  versao: number;
+  anteriorId: number;
+  paraVerificar: boolean;
+  emitido: boolean;
+  caminho: string;
 }
 
 export interface TokenPayload {

@@ -15,6 +15,11 @@ const CreateChecklist: React.FC = () => {
     verificador: "",
     executante: "",
     dueDate: "",
+    anteriorId: 0,
+    caminho: "",
+    emitido: false,
+    paraVerificar: false,
+    versao: 1,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +92,17 @@ const CreateChecklist: React.FC = () => {
             type="text"
             name="titutlo"
             value={formData.titutlo}
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Caminho:
+          <input
+            type="text"
+            name="caminho"
+            value={formData.caminho}
             onChange={handleChange}
           />
         </label>

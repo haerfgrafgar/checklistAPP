@@ -7,15 +7,15 @@ import { AddCheck } from "./api";
 export const translateSituacao = (x: number) => {
   switch (x) {
     case 0:
-      return "NÃO RESPONDIDO";
+      return "NR";
     case 1:
-      return "CONFORME";
+      return "CO";
     case 2:
-      return "NÃO CONFORME";
+      return "NC";
     case 3:
-      return "NÃO APLICAVEL";
+      return "NA";
     case 4:
-      return "PENDENTE";
+      return "PE";
   }
 };
 

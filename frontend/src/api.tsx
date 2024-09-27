@@ -295,3 +295,39 @@ export const EnviarParaAprovacao = async (id: number) => {
     }
   }
 };
+
+export const RejeitarChecklist = async (id: number) => {
+  try {
+    const data = await axios.put<Checklist>(
+      BASE_API + "api/checklist/rejeitar/" + id
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return error.message;
+    } else {
+      console.log("unexpected error: ", error);
+      return "UNEXPECTED ERROR!";
+    }
+  }
+};
+
+export const GetAllAnterioresChecklist = async (id: number) => {
+  try {
+    const data = await axios.get<Checklist[]>(
+      BASE_API + "api/checklist/anteriores/" + id
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return error.message;
+    } else {
+      console.log("unexpected error: ", error);
+      return "UNEXPECTED ERROR!";
+    }
+  }
+};

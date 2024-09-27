@@ -115,12 +115,13 @@ namespace api.Repository
 
         public async Task<List<Checklist>> GetAllAssignedAsync(string username)
         {
-            var appUser = _userManager.FindByNameAsync(username).Result;
+            //var appUser = _userManager.FindByNameAsync(username).Result;
             try
             {
 
                 return await _context.Checklist
-                    .Where(x => x.AppUserIdExec == appUser.Id && x.ParaVerificar == false)
+                    //.Where(x => x.AppUserIdExec == appUser.Id && x.ParaVerificar == false)
+                    .Where(x => x.Executante == username && x.ParaVerificar == false)
                     .ToListAsync();
             }
             catch
@@ -131,12 +132,12 @@ namespace api.Repository
 
         public async Task<List<Checklist>> GetAllAssignedVerificadorAsync(string username)
         {
-            var appUser = _userManager.FindByNameAsync(username).Result;
+            //var appUser = _userManager.FindByNameAsync(username).Result;
             try
             {
 
                 return await _context.Checklist
-                    .Where(x => x.AppUserIdCord == appUser.Id && x.ParaVerificar == true)
+                    .Where(x => x.Verificador == username && x.ParaVerificar == true)
                     .ToListAsync();
             }
             catch
