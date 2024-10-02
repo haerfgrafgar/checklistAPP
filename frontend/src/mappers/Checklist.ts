@@ -13,5 +13,10 @@ export const mapChecklistToChecklistDto = (
     titutlo: checklist.titutlo,
     verificador: checklist.verificador,
     executante: checklist.executante,
+    anteriorId: checklist.anteriorId,
+    caminho: checklist.caminho,
+    emitido: checklist.emitido,
+    paraVerificar: checklist.paraVerificar,
+    versao: checklist.versao,
   };
 };

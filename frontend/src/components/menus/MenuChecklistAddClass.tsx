@@ -93,18 +93,23 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
 
   return (
     <>
-      <div className="d-flex">
-        <div>
+      <div className="d-flex justify-content-center">
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.CIVIL ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({ ...checklists, CIVIL: !checklists.CIVIL })
             }
           >
             CIVIL
           </button>
+
           {checklists.CIVIL && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -115,8 +120,9 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
               >
                 CRITÉRIOS DE PROJETO
               </button>
-              <button>DESENHOS</button>
+              <button className="btn btn-outline-primary">DESENHOS</button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -128,6 +134,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 MEMORIAL DE CÁLCULO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -139,6 +146,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 MEMORIAL DESCRITIVO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -150,6 +158,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 RELATÓRIOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(checklistId, ChecklistClassCivilSondagemChecks);
                   window.location.reload();
@@ -161,17 +170,22 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.ELETRICA ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({ ...checklists, ELETRICA: !checklists.ELETRICA })
             }
           >
             ELETRICA
           </button>
+
           {checklists.ELETRICA && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -183,6 +197,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ATERRAMENTO E SPDA
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -194,6 +209,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 CRITÉRIO DE PROJETO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -205,6 +221,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 DESENHOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -216,6 +233,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 DETALHAMENTOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -227,6 +245,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 DIAGRAMAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -238,6 +257,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ESPECIFICAÇÕES TÉCNICAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -249,6 +269,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ESTUDOS DE INCIDÊNCIA SOLAR
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -260,6 +281,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTA DE CABOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -271,6 +293,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTA DE CARGAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -282,6 +305,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTA DE MATERIAIS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -293,6 +317,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 MEMORIAL DE CÁLCULO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -304,6 +329,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 PLANTA DE DISTRIBUIÇÃO DE FORÇA E CONTROLE
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -315,6 +341,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 PLANTAS DE ILUMINAÇÃO E TOMADAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -326,6 +353,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 PROCEDIMENTOS DE MEDIÇÃO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -337,6 +365,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 RELATÓRIOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -351,20 +380,22 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.GERAL ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
-              setChecklists({
-                ...checklists,
-                GERAL: !checklists.GERAL,
-              })
+              setChecklists({ ...checklists, GERAL: !checklists.GERAL })
             }
           >
             GERAL
           </button>
+
           {checklists.GERAL && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -379,8 +410,11 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.INSTRUMENTACAO ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({
                 ...checklists,
@@ -390,9 +424,11 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           >
             INSTRUMENTACAO
           </button>
+
           {checklists.INSTRUMENTACAO && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -404,6 +440,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 CRITÉRIO DE PROJETO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -415,6 +452,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 DESENHOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -426,6 +464,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 DIAGRAMA DE INTERLIGAÇÃO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -437,6 +476,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 FOLHA DE DADOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -448,6 +488,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTA DE CABOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -459,6 +500,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTA DE CARGAS ELÉTRICAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -470,6 +512,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -481,6 +524,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 MEMORIAL DE CÁLCULO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -495,17 +539,22 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.MECANICA ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({ ...checklists, MECANICA: !checklists.MECANICA })
             }
           >
             MECANICA
           </button>
+
           {checklists.MECANICA && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -517,6 +566,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ESPECIFICAÇÃO TÉCNICA
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -528,6 +578,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 PARECER TÉCNICO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -542,17 +593,22 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.PROCESSOS ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({ ...checklists, PROCESSOS: !checklists.PROCESSOS })
             }
           >
             PROCESSOS
           </button>
+
           {checklists.PROCESSOS && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -561,9 +617,10 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                   window.location.reload();
                 }}
               >
-                ESPECIFICAÇÃO TÉNICA
+                ESPECIFICAÇÃO TÉCNICA
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -575,6 +632,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 FLUXOGRAMAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -586,6 +644,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTA DE LINHAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -600,17 +659,22 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.SEGURANCA ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({ ...checklists, SEGURANCA: !checklists.SEGURANCA })
             }
           >
             SEGURANCA
           </button>
+
           {checklists.SEGURANCA && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -622,6 +686,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 CRITÉRIOS DE PROJETO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -633,6 +698,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ESPECIFICAÇÕES TÉCNICAS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -644,6 +710,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ESTUDOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -655,6 +722,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 FOLHAS DE DADOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -666,6 +734,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 PLANTA DO SISTEMA DE CFTV E SEGURANÇA PAT
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -677,6 +746,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 PLANTAS GERAIS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -691,17 +761,22 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.TELECOM ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({ ...checklists, TELECOM: !checklists.TELECOM })
             }
           >
             TELECOM
           </button>
+
           {checklists.TELECOM && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -716,8 +791,11 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           )}
         </div>
 
-        <div>
+        <div className="mb-3">
           <button
+            className={`btn btn-${
+              checklists.TUBULACOES ? "secondary" : "primary"
+            } me-2`}
             onClick={() =>
               setChecklists({
                 ...checklists,
@@ -727,9 +805,11 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
           >
             TUBULACOES
           </button>
+
           {checklists.TUBULACOES && (
-            <div>
+            <div className="btn-group-vertical mt-2">
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -741,6 +821,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 CRITÉRIO DE PROJETO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -752,6 +833,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 DESENHOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -763,6 +845,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 DESENHOS - PLANTA E PERFIL
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -774,6 +857,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ESPECIFICAÇÃO TÉCNICA
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -785,6 +869,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 FOLHAS DE DADOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -796,6 +881,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 ISOMÉTRICOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -807,6 +893,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LAYOUT
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -818,6 +905,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTA DE MATERIAIS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -829,6 +917,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 LISTAS DE SUPORTES PARA TUBULAÇÃO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -840,6 +929,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 MEMÓRIA DE CÁLCULO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -851,6 +941,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 PLANTAS DE MACROLOCALIZAÇÃO
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
@@ -862,6 +953,7 @@ const MenuChecklistAddClass = ({ checklistId }: Props) => {
                 RELATÓRIOS
               </button>
               <button
+                className="btn btn-outline-primary"
                 onClick={() => {
                   BulkAddChecks(
                     checklistId,
