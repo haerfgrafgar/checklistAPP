@@ -28,12 +28,24 @@ const ListChecklistsVerificadorPage = () => {
 
   return (
     <>
-      {serverError && <h1>{serverError}</h1>}
-      <h1>VERIFICADOR:</h1>
-      <ChecklistList
-        checklists={searchResult}
-        verificador={true}
-      ></ChecklistList>
+      <div
+        style={{ minHeight: "100vh", backgroundColor: "rgb(211, 211, 211)" }}
+      >
+        {serverError && <h1>{serverError}</h1>}
+        <h1
+          className="display-4 text-center"
+          style={{ fontWeight: "bold", color: "#343a40" }}
+        >
+          VERIFICADOR:
+        </h1>
+
+        <div style={{ width: "99%", margin: "0 auto" }}>
+          <ChecklistList
+            checklists={searchResult}
+            verificador={true}
+          ></ChecklistList>
+        </div>
+      </div>
     </>
   );
 };

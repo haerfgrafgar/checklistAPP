@@ -1,8 +1,12 @@
 import React from "react";
 import "../css/navbar.css";
 import { getToken } from "../Helper";
+import { useLocation } from "react-router-dom";
 
 const Navbar: React.FC = () => {
+  const location = useLocation();
+  if (location.pathname === "/login") return <></>;
+
   const token = getToken();
 
   return (

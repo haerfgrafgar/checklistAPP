@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../Context/useAuth";
 import { useNavigate } from "react-router";
-import { sleep } from "../Helper";
+import "../css/loginpage.css";
 
 type Props = {};
 
@@ -32,38 +32,49 @@ const LoginPage = (props: Props) => {
     navigate("/");
   };
   return (
-    <section>
-      <div>
-        <div>
-          <div>
-            <h1>Sign in to your account</h1>
-            <form onSubmit={handleSubmit(handleLogin)}>
-              <div>
-                <label htmlFor="email">Username</label>
-                <input
-                  type="text"
-                  id="username"
-                  placeholder="Username"
-                  {...register("userName")}
-                />
-                {errors.userName ? <p>{errors.userName.message}</p> : ""}
-              </div>
-              <div>
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="••••••••"
-                  {...register("password")}
-                />
-                {errors.password ? <p>{errors.password.message}</p> : ""}
-              </div>
-              <button type="submit">Sign in</button>
-            </form>
+    <div className="container-fluid d-flex justify-content-center align-items-center vh-100 full-screen-bg">
+      <div
+        className="card shadow-sm p-4"
+        style={{ width: "400px", borderRadius: "10px" }}
+      >
+        <h1 className="text-center mb-4">Login</h1>
+        <form onSubmit={handleSubmit(handleLogin)}>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="form-control"
+              placeholder="Username"
+              {...register("userName")}
+            />
+            {errors.userName && (
+              <p className="text-danger">{errors.userName.message}</p>
+            )}
           </div>
-        </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="form-control"
+              placeholder="••••••••"
+              {...register("password")}
+            />
+            {errors.password && (
+              <p className="text-danger">{errors.password.message}</p>
+            )}
+          </div>
+          <button type="submit" className="btn btn-primary w-100">
+            Sign in
+          </button>
+        </form>
       </div>
-    </section>
+    </div>
   );
 };
 

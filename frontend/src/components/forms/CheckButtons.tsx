@@ -25,15 +25,19 @@ const AddChecklistForm = ({ id, verificador }: Props) => {
 
   if (verificador) {
     return (
-      <div className="d-flex">
+      <div className="d-flex justify-content-between">
         <button
-          className="w-50"
+          className="btn btn-primary w-50 me-2" // Bootstrap button styles
           type="button"
           onClick={() => onClickVerify(id)}
         >
           Verify
         </button>
-        <button className="w-50" type="button" onClick={() => onClickEdit(id)}>
+        <button
+          className="btn btn-secondary w-50" // Bootstrap button styles
+          type="button"
+          onClick={() => onClickEdit(id)}
+        >
           Edit
         </button>
       </div>
@@ -43,16 +47,16 @@ const AddChecklistForm = ({ id, verificador }: Props) => {
   return (
     <>
       {token?.role === "Admin" ? (
-        <div className="d-flex">
+        <div className="d-flex justify-content-between">
           <button
-            className="w-50"
+            className="btn btn-primary w-50 me-2" // Bootstrap button styles
             type="button"
             onClick={() => onClickRespond(id)}
           >
             Respond
           </button>
           <button
-            className="w-50"
+            className="btn btn-secondary w-50" // Bootstrap button styles
             type="button"
             onClick={() => onClickEdit(id)}
           >
@@ -61,7 +65,7 @@ const AddChecklistForm = ({ id, verificador }: Props) => {
         </div>
       ) : (
         <button
-          className="w-100"
+          className="btn btn-warning w-100" // Bootstrap button styles
           type="button"
           onClick={() => onClickRespond(id)}
         >

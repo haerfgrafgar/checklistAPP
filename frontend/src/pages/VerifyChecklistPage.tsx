@@ -82,7 +82,7 @@ const ChecklistDetailsPage = (props: Props) => {
       if (typeof anterioresChecklistsData === "string") {
         return 0;
       }
-      setAnterioresChecklists(anterioresChecklistsData.data);
+      setAnterioresChecklists(anterioresChecklistsData.data.reverse());
 
       return;
     } catch (error) {
@@ -111,78 +111,128 @@ const ChecklistDetailsPage = (props: Props) => {
   return (
     <>
       <div>
-        <h1>Informações gerais:</h1>
-        <p className="m-0">Id: {checklist?.id}</p>
-        <p className="m-0">NumDestaLV: {checklist?.numDestaLV}</p>
-        <p className="m-0">NumContrato: {checklist?.numContrato}</p>
-        <p className="m-0">NumDocumento: {checklist?.numDocumento}</p>
-        <p className="m-0">Projeto: {checklist?.projeto}</p>
-        <p className="m-0">Revisao: {checklist?.revisao}</p>
-        <p className="m-0">Versao: {checklist?.versao}</p>
-        <p className="m-0">Titulo: {checklist?.titutlo}</p>
-        <p className="m-0">Verificador: {checklist?.verificador}</p>
-        <p className="m-0">Executante: {checklist?.executante}</p>
-        <p className="m-0">CreatedOn: {checklist?.createdOn}</p>
-        <p className="m-0">DueDate: {checklist?.dueDate}</p>
+        <div className="container mt-4">
+          <div className="card ">
+            <div className="card-header text-white bg-dark">
+              <h1>Informações gerais</h1>
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                  NumDestaLV: {checklist?.numDestaLV}
+                </li>
+                <li className="list-group-item">
+                  NumContrato: {checklist?.numContrato}
+                </li>
+                <li className="list-group-item">
+                  NumDocumento: {checklist?.numDocumento}
+                </li>
+                <li className="list-group-item">
+                  Projeto: {checklist?.projeto}
+                </li>
+                <li className="list-group-item">
+                  Revisao: {checklist?.revisao}
+                </li>
+                <li className="list-group-item">Versao: {checklist?.versao}</li>
+                <li className="list-group-item">
+                  Titulo: {checklist?.titutlo}
+                </li>
+                <li className="list-group-item">
+                  Verificador: {checklist?.verificador}
+                </li>
+                <li className="list-group-item">
+                  Executante: {checklist?.executante}
+                </li>
+                <li className="list-group-item">
+                  CreatedOn: {checklist?.createdOn}
+                </li>
+                <li className="list-group-item">
+                  DueDate: {checklist?.dueDate}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <h1 className="mt-5">Checks:</h1>
 
-        <ul className="mt-3">
+        <ul className="mt-3 list-group">
           {checklist?.checks.map((check) => (
-            <li className="d-flex" key={check.id}>
-              <div className="ms-5">{check.item}</div>
+            <li
+              className="list-group-item d-flex justify-content-between align-items-center"
+              key={check.id}
+            >
+              <div className="flex-shrink-0" style={{ width: "50px" }}>
+                {check.item}
+              </div>
+              <div className="flex-grow-1 ms-3">{check.descricao}</div>
 
-              <div className="ms-5 w-50">{check.descricao}</div>
-              <div className="ms-5 w-25 d-flex">
-                {anterioresChecklists?.map((checklist) => (
+              <div className="d-flex align-items-center">
+                {anterioresChecklists?.map((previousChecklist) => (
                   <button
                     onClick={() =>
                       handleSituacaoOnClick(
-                        checklist.checks[check.item - 1].motivo
+                        previousChecklist.checks[check.item - 1].motivo
                       )
                     }
-                    className="me-3 btn"
-                    key={checklist.checks[check.item - 1].id}
+                    className={
+                      previousChecklist.checks[check.item - 1].situacao === 1 ||
+                      previousChecklist.checks[check.item - 1].situacao === 3
+                        ? "btn btn-success ms-2"
+                        : "btn btn-danger ms-2"
+                    }
+                    key={previousChecklist.checks[check.item - 1].id}
                   >
                     {translateSituacao(
-                      checklist.checks[check.item - 1].situacao
+                      previousChecklist.checks[check.item - 1].situacao
                     )}
                   </button>
                 ))}
-                <button className="btn">
+                <div
+                  style={{
+                    width: "2px",
+                    backgroundColor: "black",
+                    height: "30px",
+                    margin: "0 5px",
+                  }}
+                ></div>
+
+                <button
+                  className={
+                    check.situacao === 1 || check.situacao === 3
+                      ? "btn btn-success me-2"
+                      : "btn btn-danger me-2"
+                  }
+                >
                   {translateSituacao(check.situacao)}
                 </button>
               </div>
 
-              <div className="ms-5 me-3">
-                <div className="d-flex">
+              <div className="ms-4">
+                <div className="btn-group" role="group">
                   <button
-                    onClick={() => {
-                      checkOnClickUpdate(check, 1);
-                    }}
+                    onClick={() => checkOnClickUpdate(check, 1)}
+                    className="btn btn-success"
                   >
-                    C
+                    CO
                   </button>
                   <button
-                    onClick={() => {
-                      checkOnClickUpdate(check, 2);
-                    }}
-                  >
-                    NC
-                  </button>
-                  <button
-                    onClick={() => {
-                      checkOnClickUpdate(check, 3);
-                    }}
+                    onClick={() => checkOnClickUpdate(check, 3)}
+                    className="btn btn-success"
                   >
                     NA
                   </button>
                   <button
-                    onClick={() => {
-                      checkOnClickUpdate(check, 4);
-                    }}
+                    onClick={() => checkOnClickUpdate(check, 2)}
+                    className="btn btn-danger"
                   >
-                    P
+                    NC
+                  </button>
+                  <button
+                    onClick={() => checkOnClickUpdate(check, 4)}
+                    className="btn btn-danger"
+                  >
+                    PE
                   </button>
                 </div>
               </div>
@@ -191,17 +241,25 @@ const ChecklistDetailsPage = (props: Props) => {
         </ul>
       </div>
 
-      <div className="d-flex">
-        {isChecklistCompleted && (
-          <div>
-            <button onClick={handleOnEnviar}>
-              <h1>EMITIR</h1>
-            </button>
-          </div>
-        )}
-        <button onClick={onClickRejeitar}>
-          <h1>REJEITAR</h1>
-        </button>
+      <div className="text-center mt-4 mb-2">
+        <div className="d-flex justify-content-center">
+          {isChecklistCompleted && (
+            <div>
+              <button
+                onClick={handleOnEnviar}
+                className="btn btn-success btn-lg me-2" // Bootstrap classes for styling
+              >
+                EMITIR
+              </button>
+            </div>
+          )}
+          <button
+            onClick={onClickRejeitar}
+            className="btn btn-danger btn-lg" // Bootstrap classes for styling
+          >
+            REJEITAR
+          </button>
+        </div>
       </div>
     </>
   );

@@ -40,107 +40,40 @@ const CreateChecklist: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="">
-      <div className="">
-        <label>
-          Num Desta LV:
-          <input
-            type="text"
-            name="numDestaLV"
-            value={formData.numDestaLV}
-            onChange={handleChange}
-          />
-        </label>
+    <form onSubmit={handleSubmit} className="container mt-3">
+      <h1
+        className="display-4 text-center"
+        style={{ fontWeight: "bold", color: "#343a40" }}
+      >
+        Informações Gerais:
+      </h1>
+      <div className="row mt-5">
+        {[
+          { label: "Num Desta LV", name: "numDestaLV" },
+          { label: "Num Contrato", name: "numContrato" },
+          { label: "Num Documento", name: "numDocumento" },
+          { label: "Projeto", name: "projeto" },
+          { label: "Titulo", name: "titutlo" },
+          { label: "Caminho", name: "caminho" },
+          { label: "Verificador", name: "verificador" },
+          { label: "Executante", name: "executante" },
+          { label: "Due Date", name: "dueDate", type: "date" },
+        ].map(({ label, name, type = "text" }) => (
+          <div className="col-md-6 mb-3" key={name}>
+            <label className="form-label">{label}</label>
+            <input
+              type={type}
+              className="form-control"
+              name={name}
+              value={formData[name]}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
       </div>
-      <div>
-        <label>
-          Num Contrato:
-          <input
-            type="text"
-            name="numContrato"
-            value={formData.numContrato}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Num Documento:
-          <input
-            type="text"
-            name="numDocumento"
-            value={formData.numDocumento}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Projeto:
-          <input
-            type="text"
-            name="projeto"
-            value={formData.projeto}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Titulo:
-          <input
-            type="text"
-            name="titutlo"
-            value={formData.titutlo}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Caminho:
-          <input
-            type="text"
-            name="caminho"
-            value={formData.caminho}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Verificador:
-          <input
-            type="text"
-            name="verificador"
-            value={formData.verificador}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Executante:
-          <input
-            type="text"
-            name="executante"
-            value={formData.executante}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Due Date:
-          <input
-            type="date"
-            name="dueDate"
-            value={formData.dueDate}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <button type="submit">Submit</button>
+      <button type="submit" className="btn btn-primary btn-lg w-100">
+        Submit
+      </button>
     </form>
   );
 };

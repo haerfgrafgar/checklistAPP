@@ -33,14 +33,29 @@ const ListUsersPage = () => {
       {serverError ? (
         <p>{serverError}</p>
       ) : (
-        searchResult.map((user) => (
-          <button
-            key={user.username}
-            onClick={() => handleClick(user.username)}
-          >
-            {user.username}
-          </button>
-        ))
+        <div className="row mt-3 ms-3">
+          {searchResult.map((user) => (
+            <div className="col-md-3 mb-4" key={user.username}>
+              <div
+                className="card"
+                style={{ height: "100%", borderRadius: "10px" }}
+              >
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{user.username}</h5>
+                  <h6>Current Task</h6>
+                  <div className="mt-auto">
+                    <button
+                      className="btn btn-primary w-100"
+                      onClick={() => handleClick(user.username)}
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

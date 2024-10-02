@@ -178,64 +178,95 @@ const ChecklistDetailsPage = (props: Props) => {
     <>
       {currentQuestionIndex === checklist?.checks.length && (
         <div>
-          <h1>Informações gerais:</h1>
-          <p className="m-0">Id: {checklist?.id}</p>
-          <p className="m-0">NumDestaLV: {checklist?.numDestaLV}</p>
-          <p className="m-0">NumContrato: {checklist?.numContrato}</p>
-          <p className="m-0">NumDocumento: {checklist?.numDocumento}</p>
-          <p className="m-0">Projeto: {checklist?.projeto}</p>
-          <p className="m-0">Revisao: {checklist?.revisao}</p>
-          <p className="m-0">Versao: {checklist?.versao}</p>
-          <p className="m-0">Titulo: {checklist?.titutlo}</p>
-          <p className="m-0">Verificador: {checklist?.verificador}</p>
-          <p className="m-0">Executante: {checklist?.executante}</p>
-          <p className="m-0">CreatedOn: {checklist?.createdOn}</p>
-          <p className="m-0">DueDate: {checklist?.dueDate}</p>
-
+          <div className="container mt-4">
+            <div className="card ">
+              <div className="card-header text-white bg-dark">
+                <h1>Informações gerais</h1>
+              </div>
+              <div className="card-body">
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">
+                    NumDestaLV: {checklist?.numDestaLV}
+                  </li>
+                  <li className="list-group-item">
+                    NumContrato: {checklist?.numContrato}
+                  </li>
+                  <li className="list-group-item">
+                    NumDocumento: {checklist?.numDocumento}
+                  </li>
+                  <li className="list-group-item">
+                    Projeto: {checklist?.projeto}
+                  </li>
+                  <li className="list-group-item">
+                    Revisao: {checklist?.revisao}
+                  </li>
+                  <li className="list-group-item">
+                    Versao: {checklist?.versao}
+                  </li>
+                  <li className="list-group-item">
+                    Titulo: {checklist?.titutlo}
+                  </li>
+                  <li className="list-group-item">
+                    Verificador: {checklist?.verificador}
+                  </li>
+                  <li className="list-group-item">
+                    Executante: {checklist?.executante}
+                  </li>
+                  <li className="list-group-item">
+                    CreatedOn: {checklist?.createdOn}
+                  </li>
+                  <li className="list-group-item">
+                    DueDate: {checklist?.dueDate}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <h1 className="mt-5">Checks:</h1>
 
-          <ul className="mt-3">
+          <ul className="mt-3 list-group">
             {checklist?.checks.map((check) => (
-              <li className="d-flex" key={check.id}>
-                <div className="ms-5">{check.item}</div>
-                <div className="ms-5 w-50">{check.descricao}</div>
+              <li
+                className="list-group-item d-flex align-items-center"
+                key={check.id}
+              >
+                <div className="flex-grow-1 ms-3">{check.item}</div>
+                <div className="flex-grow-1 ms-3">{check.descricao}</div>
                 <button
-                  className="ms-5 w-25 btn"
-                  onClick={() => {
-                    handleSituacaoOnClick(check.motivo);
-                  }}
+                  className={
+                    check.situacao === 1 || check.situacao === 3
+                      ? "btn btn-success ms-3"
+                      : "btn btn-danger ms-3"
+                  }
+                  onClick={() => handleSituacaoOnClick(check.motivo)}
                 >
                   {translateSituacao(check.situacao)}
                 </button>
-                <div className="ms-5 w-25">
-                  <div className="d-flex">
+                <div className="ms-3">
+                  <div className="btn-group" role="group">
                     <button
-                      onClick={() => {
-                        checkOnClickUpdate(check, 1);
-                      }}
+                      className="btn btn-success"
+                      onClick={() => checkOnClickUpdate(check, 1)}
                     >
-                      C
+                      CO
                     </button>
                     <button
-                      onClick={() => {
-                        checkOnClickUpdate(check, 2);
-                      }}
-                    >
-                      NC
-                    </button>
-                    <button
-                      onClick={() => {
-                        checkOnClickUpdate(check, 3);
-                      }}
+                      className="btn btn-success"
+                      onClick={() => checkOnClickUpdate(check, 3)}
                     >
                       NA
                     </button>
                     <button
-                      onClick={() => {
-                        checkOnClickUpdate(check, 4);
-                      }}
+                      className="btn btn-danger"
+                      onClick={() => checkOnClickUpdate(check, 2)}
                     >
-                      P
+                      NC
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => checkOnClickUpdate(check, 4)}
+                    >
+                      PE
                     </button>
                   </div>
                 </div>
@@ -246,88 +277,95 @@ const ChecklistDetailsPage = (props: Props) => {
       )}
 
       {currentQuestionIndex !== checklist?.checks.length && (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <div className="text-center mt-5">
           <h2>{checklist?.checks[currentQuestionIndex].descricao}</h2>
 
-          <div>
+          <div className="mt-4">
             <button
               ref={buttonRefPrev}
               onClick={handlePrevious}
               disabled={currentQuestionIndex === 0}
-              className="me-5"
+              className="btn btn-secondary me-3"
             >
               Previous
             </button>
 
-            <button
-              ref={buttonRefC}
-              onClick={async () => {
-                await checkOnClickUpdate(
-                  checklist!.checks[currentQuestionIndex],
-                  1
-                );
-              }}
-              className="me-1"
-            >
-              C
-            </button>
-            <button
-              ref={buttonRefNC}
-              onClick={async () => {
-                await checkOnClickUpdate(
-                  checklist!.checks[currentQuestionIndex],
-                  2
-                );
-              }}
-              className="me-1"
-            >
-              NC
-            </button>
-            <button
-              ref={buttonRefNA}
-              onClick={async () => {
-                await checkOnClickUpdate(
-                  checklist!.checks[currentQuestionIndex],
-                  3
-                );
-              }}
-              className="me-1"
-            >
-              NA
-            </button>
-            <button
-              ref={buttonRefP}
-              onClick={async () => {
-                await checkOnClickUpdate(
-                  checklist!.checks[currentQuestionIndex],
-                  4
-                );
-              }}
-            >
-              P
-            </button>
+            <div className="btn-group" role="group">
+              <button
+                ref={buttonRefC}
+                onClick={async () => {
+                  await checkOnClickUpdate(
+                    checklist!.checks[currentQuestionIndex],
+                    1
+                  );
+                }}
+                className="btn btn-success me-1"
+              >
+                C
+              </button>
+              <button
+                ref={buttonRefNC}
+                onClick={async () => {
+                  await checkOnClickUpdate(
+                    checklist!.checks[currentQuestionIndex],
+                    2
+                  );
+                }}
+                className="btn btn-warning me-1"
+              >
+                NC
+              </button>
+              <button
+                ref={buttonRefNA}
+                onClick={async () => {
+                  await checkOnClickUpdate(
+                    checklist!.checks[currentQuestionIndex],
+                    3
+                  );
+                }}
+                className="btn btn-info me-1"
+              >
+                NA
+              </button>
+              <button
+                ref={buttonRefP}
+                onClick={async () => {
+                  await checkOnClickUpdate(
+                    checklist!.checks[currentQuestionIndex],
+                    4
+                  );
+                }}
+                className="btn btn-danger"
+              >
+                P
+              </button>
+            </div>
 
             <button
               ref={buttonRefJump}
               onClick={() => {
                 checkOnClickUpdate(checklist!.checks[currentQuestionIndex], 0);
               }}
-              className="ms-5"
+              className="btn btn-outline-primary ms-5"
             >
               Jump
             </button>
           </div>
 
-          <p>
-            Item {currentQuestionIndex + 1} / {questions.length}
+          <p className="mt-3">
+            Item {currentQuestionIndex + 1} / {checklist?.checks.length}
           </p>
         </div>
       )}
 
       {isChecklistCompleted && (
-        <div>
-          <button onClick={handleOnEnviar}>
-            <h1>ENVIAR</h1>
+        <div className="text-center mt-4 mb-2">
+          <button
+            onClick={handleOnEnviar}
+            className="btn btn-success btn-lg"
+            style={{ padding: "10px 20px", borderRadius: "5px" }}
+          >
+            <h1 className="m-0">ENVIAR</h1>
           </button>
         </div>
       )}
